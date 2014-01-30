@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+require 'shiptrack'
+require 'fileutils'
+
+module ShipTrack
+  
+  $VERSION = '0.0.1'
+  
+  $program = 'shiptrack'
+  $resources_path = File.expand_path( File.dirname( __FILE__ ) + '/../res' )
+  
+  configuration = Configuration.load( "#{ENV['HOME']}/.shiptrackrc" )
+  configuration[ :active_shipments_filename ] = 'active_shipments'
+  configuration[ :active_shipments_filepath ] = File.join( configuration[ 'path' ], configuration[ :active_shipments_filename ] )
+  configuration[ :archive_path ] = File.join( configuration[ 'path' ], 'archive' )
+  configuration[ :active_archive_filepath ] = File.join( configuration[ :archive_path ], DateTime.now.strftime( 'archive_%Y-%m' ) )
+
+  FileUtils.mkdir configuration[ 'path' ] unless File.directory?( configuration[ 'path' ] )
+  ShipmentList.new().save( configuration[ :active_shipments_filepath ] ) unless File.exists?( configuration[ :active_shipments_filepath ] )
+  
+  command_processor = CommandProcessor.initialize do
+    handle HelpCommand.new
+    handle VersionCommand.new
+    handle ListCommand.new
+    handle PurchaseCommand.new
+    handle DetailsCommand.new
+    handle UpdateCommand.new
+    handle OrderCommand.new
+    handle PaidCommand.new
+    handle TrackCommand.new
+    handle ShipCommand.new
+    handle ReceiveCommand.new
+    handle ArchiveCommand.new
+  end
+
+  begin
+    if ARGV.size == 0
+      command_processor.each_command do |command|
+        puts "%-12s #{command.description}" % command.name
+      end
+    else
+      command_processor.run( ARGV[ 0 ], configuration, ARGV[ 1..-1 ] )
+    end
+  rescue RuntimeError => e
+    abort "ERROR: #{e.message}"
+  end
+
+end

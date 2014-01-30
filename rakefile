@@ -1,0 +1,13 @@
+task :default => :build
+
+task :build do
+  sh( 'gem build shiptrack.gemspec' )
+end
+
+task :install => [ :build ] do
+  Dir.glob( '*.gem' ) do |filename|
+    if filename.match /shiptrack-.*\.gem/
+      sh( "gem install #{filename}" )
+    end
+  end
+end
