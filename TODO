@@ -13,7 +13,6 @@
 ** pay
 ** payment_date
 * remove ship_ prefix from method and tracking_number
-* rspec
 * cucumber?
 * sanity check "pay" on "shipped" shipment for instance
 * push loading of shipment list down into command? or module?

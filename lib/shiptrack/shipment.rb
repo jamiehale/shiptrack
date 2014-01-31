@@ -16,10 +16,6 @@ module ShipTrack
       fields.inject( {} ) { |d,n| d[ n ] = instance_variable_get( "@#{n}" ) unless instance_variable_get( "@#{n}" ).nil? ; d }
     end
     
-    def name_matches( s )
-      @name.downcase[ 0, s.length ] = s.downcase
-    end
-    
     def purchase_date=( date )
       @purchase_date = date
       @order_date = date if @order_date.nil?
@@ -38,23 +34,33 @@ module ShipTrack
       @order_date = date if @order_date.nil?
     end
     
+    def ordered?
+      !order_date.nil?
+    end
+    
+    def paid?
+      !purchase_date.nil?
+    end
+    
+    def shipped?
+      !ship_date.nil?
+    end
+    
+    def received?
+      !receive_date.nil?
+    end
+    
     def state
-      if order_date.nil?
-        return "UNKNOWN"
+      if ordered? and !paid? and !shipped? and !received?
+        return 'ORDERED'
+      elsif ordered? and paid? and !shipped? and !received?
+        return 'PAID'
+      elsif ordered? and paid? and shipped? and !received?
+        return 'SHIPPED'
+      elsif ordered? and paid? and shipped? and received?
+        return 'RECEIVED'
       else
-        if purchase_date.nil?
-          return "ORDERED"
-        else
-          if ship_date.nil?
-            return "PAID"
-          else
-            if receive_date.nil?
-              return "SHIPPED"
-            else
-              return "RECEIVED"
-            end
-          end
-        end
+        return 'UNKNOWN'
       end
     end
     
