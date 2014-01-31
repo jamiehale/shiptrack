@@ -5,18 +5,18 @@ module ShipTrack
     def initialize
       super( 'update' )
       describe 'Updates attributes of a shipment'
-      handle_parameters [ [ :index, :int ] ]
-      handle_option :name, { :type => :string }
-      handle_option :vendor, { :type => :string }
-      handle_option :order_date, { :type => :string }
-      handle_option :purchase_date, { :type => :string }
-      handle_option :ship_date, { :type => :string }
-      handle_option :ship_method, { :type => :string }
-      handle_option :tracking_number, { :type => :string }
-      handle_option :receive_date, { :type => :string }
-      handle_option :clear_receipt, { :type => :flag }
-      handle_option :clear_shipping, { :type => :flag }
-      handle_option :clear_payment, { :type => :flag }
+      handle_parameters [ CommandParameter.new( :index, :int ) ]
+      handle_option CommandOption.new( :name, :string )
+      handle_option CommandOption.new( :vendor, :string )
+      handle_option CommandOption.new( :order_date, :string )
+      handle_option CommandOption.new( :purchase_date, :string )
+      handle_option CommandOption.new( :ship_date, :string )
+      handle_option CommandOption.new( :ship_method, :string )
+      handle_option CommandOption.new( :tracking_number, :string )
+      handle_option CommandOption.new( :receive_date, :string )
+      handle_option CommandOption.new( :clear_receipt, :flag )
+      handle_option CommandOption.new( :clear_shipping, :flag )
+      handle_option CommandOption.new( :clear_payment, :flag )
     end
     
     def run( params, configuration, options )
@@ -73,7 +73,7 @@ module ShipTrack
         end
       end
       
-      def clear_receipt( shiptment, options )
+      def clear_receipt( shipment, options )
         unless options[ :clear_receipt ].nil?
           shipment.receive_date = nil
         end
