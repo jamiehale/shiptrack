@@ -6,15 +6,12 @@ module ShipTrack
       @shipments = shipments
     end
     
-    def self.load( filename )
-      shipments = YAML.load_file( filename )
-      ShipmentList.new( shipments.map { |s| Shipment.new( s ) } )
+    def count
+      @shipments.size
     end
     
-    def save( filename )
-      File.open( filename, 'w' ) do |f|
-        f.write( to_yaml )
-      end
+    def empty?
+      @shipments.empty?
     end
     
     def add( shipment )
@@ -39,6 +36,17 @@ module ShipTrack
     
     def get_by_index( index )
       @shipments[ index ]
+    end
+    
+    def self.load( filename )
+      shipments = YAML.load_file( filename )
+      ShipmentList.new( shipments.map { |s| Shipment.new( s ) } )
+    end
+    
+    def save( filename )
+      File.open( filename, 'w' ) do |f|
+        f.write( to_yaml )
+      end
     end
     
   end
