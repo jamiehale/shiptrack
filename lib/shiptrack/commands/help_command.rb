@@ -5,7 +5,7 @@ module ShipTrack
     def initialize
       super( 'help' )
       describe 'Shows information about sdoc commands'
-      handle_parameters [ [ :command, :string ] ]
+      handle_parameters [ CommandParameter.new( :command, :string ) ]
     end
     
     def run( parameters, configuration, options )
