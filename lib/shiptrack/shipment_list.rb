@@ -19,7 +19,7 @@ module ShipTrack
     end
     
     def delete( index )
-      @shipments.delete_at( index - 1 )
+      @shipments.delete_at( index )
     end
     
     def to_yaml

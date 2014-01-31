@@ -78,7 +78,7 @@ module ShipTrack
         
         let( :shipment_list ) { ShipmentList.new( [ shipment_1 ] ) }
         
-        before( :each ) { shipment_list.delete( 1 ) }
+        before( :each ) { shipment_list.delete( 0 ) }
         
         it 'leaves a count of 0' do
           expect( shipment_list.count ).to eq 0
