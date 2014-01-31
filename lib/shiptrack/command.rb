@@ -2,7 +2,7 @@ module ShipTrack
   
   class Command
     
-    attr_reader :name, :description
+    attr_reader :name, :description, :parameter_sets
     attr_accessor :command_processor
     
     def initialize( name )
@@ -10,6 +10,10 @@ module ShipTrack
       @command_processor = nil
       @parameter_sets = []
       @options = {}
+    end
+    
+    def options
+      @options.values
     end
     
     def describe( d )
@@ -24,8 +28,8 @@ module ShipTrack
       @parameter_sets << []
     end
     
-    def handle_option( name, details )
-      @options[ name ] = details
+    def handle_option( option )
+      @options[ option.name ] = option
     end
     
     def inject_command( name, configuration, args = [] )
@@ -61,16 +65,16 @@ module ShipTrack
     def describe_options
       return if @options.empty?
       puts "Options:"
-      @options.each do |option,details|
-        puts "%20s    %s" % [ option_details( option, details ), details[ :description ] ]
+      @options.each do |name,option|
+        puts "%20s    %s" % [ option_details( option ), option.description ]
       end
     end
     
-    def option_details( option, details )
-      if details[ :type ] == :string
-        "--#{option} <#{option}>"
+    def option_details( option )
+      if option.type == :string
+        "--#{option.name} <#{option.name}>"
       else
-        "--#{option}"
+        "--#{option.name}"
       end
     end
     
@@ -81,8 +85,8 @@ module ShipTrack
       while ( i < args.size ) do
         if @options.keys.map{|o| "--#{o}"}.include? args[ i ]
           option_name = ( ( args[ i ] )[ 2..-1 ] ).to_sym
-          details = @options[ option_name ]
-          if details[ :type ] == :string
+          option = @options[ option_name ]
+          if option.type == :string
             if ( i + 1 ) < args.size
               options[ option_name ] = args[ i + 1 ]
               i += 1
@@ -92,7 +96,7 @@ module ShipTrack
           elsif details[ :type ] == :flag
             options[ option_name ] = true
           else
-            raise "Invalid option type #{details[:type]}"
+            raise "Invalid option type #{option.type}"
           end
         else
           read_parameters << args[ i ]

@@ -5,8 +5,8 @@ module ShipTrack
     def initialize
       super( 'paid' )
       describe 'Mark an ORDERED shipment as paid'
-      handle_parameters [ [ :index, :int ] ]
-      handle_option :date, { :type => :string }
+      handle_parameters [ CommandParameter.new( :index, :int ) ]
+      handle_option CommandOption.new( :date, :string )
     end
 
     def run( params, configuration, options )

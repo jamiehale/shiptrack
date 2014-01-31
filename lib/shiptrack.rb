@@ -1,5 +1,7 @@
 require 'shiptrack/command'
 require 'shiptrack/command_processor'
+require 'shiptrack/command_parameter'
+require 'shiptrack/command_option'
 require 'shiptrack/configuration'
 require 'shiptrack/shipment'
 require 'shiptrack/shipment_list'
