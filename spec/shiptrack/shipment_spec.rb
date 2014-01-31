@@ -213,22 +213,30 @@ module ShipTrack
 
     describe 'automatically setting dates' do
       
-      before( :each ) do
-        @shipment = Shipment.new
-      end
-      
+      let( :shipment ) { Shipment.new }
+
       describe 'purchasing' do
-        
+
         before( :each ) do
-          @shipment.purchase_date = '2014-01-01'
+          shipment.purchase_date = '2014-01-01'
         end
         
         it 'sets purchase date' do
-          @shipment.purchase_date.should == '2014-01-01'
+          shipment.purchase_date.should == '2014-01-01'
         end
         
         it 'sets order date too' do
-          @shipment.order_date.should == '2014-01-01'
+          shipment.order_date.should == '2014-01-01'
+        end
+        
+        describe 'already ordered' do
+          
+          let( :shipment ) { Shipment.new( { :order_date => '2013-12-01' } ) }
+          
+          it 'does not overwrite the order date' do
+            expect( shipment.order_date ).to eq '2013-12-01'
+          end
+          
         end
         
       end
@@ -236,19 +244,39 @@ module ShipTrack
       describe 'shipping' do
         
         before( :each ) do
-          @shipment.ship_date = '2014-01-02'
+          shipment.ship_date = '2014-01-02'
         end
         
         it 'sets ship_date' do
-          @shipment.ship_date.should == '2014-01-02'
+          shipment.ship_date.should == '2014-01-02'
         end
         
         it 'sets purchase_date too' do
-          @shipment.purchase_date.should == '2014-01-02'
+          shipment.purchase_date.should == '2014-01-02'
         end
         
         it 'sets order_date too' do
-          @shipment.order_date.should == '2014-01-02'
+          shipment.order_date.should == '2014-01-02'
+        end
+        
+        describe 'already purchased' do
+          
+          let( :shipment ) { Shipment.new( { :purchase_date => '2013-12-01' } ) }
+          
+          it 'does not overwrite the purchase date' do
+            expect( shipment.purchase_date ).to eq '2013-12-01'
+          end
+          
+        end
+        
+        describe 'already ordered' do
+
+          let( :shipment ) { Shipment.new( { :order_date => '2013-12-01' } ) }
+          
+          it 'does not overwrite the order date' do
+            expect( shipment.order_date ).to eq '2013-12-01'
+          end
+          
         end
         
       end
@@ -256,23 +284,53 @@ module ShipTrack
       describe 'receiving' do
         
         before( :each ) do
-          @shipment.receive_date = '2014-01-03'
+          shipment.receive_date = '2014-01-03'
         end
       
         it 'sets receive_date' do
-          @shipment.receive_date.should == '2014-01-03'
+          shipment.receive_date.should == '2014-01-03'
         end
         
         it 'sets ship_date too' do
-          @shipment.ship_date.should == '2014-01-03'
+          shipment.ship_date.should == '2014-01-03'
         end
 
         it 'sets purchase_date too' do
-          @shipment.purchase_date.should == '2014-01-03'
+          shipment.purchase_date.should == '2014-01-03'
         end
 
         it 'sets order_date too' do
-          @shipment.order_date.should == '2014-01-03'
+          shipment.order_date.should == '2014-01-03'
+        end
+        
+        describe 'already shipped' do
+          
+          let( :shipment ) { Shipment.new( { :ship_date => '2013-12-01' } ) }
+          
+          it 'does not overwrite the ship date' do
+            expect( shipment.ship_date ).to eq '2013-12-01'
+          end
+          
+        end
+        
+        describe 'already purchased' do
+          
+          let( :shipment ) { Shipment.new( { :purchase_date => '2013-12-01' } ) }
+          
+          it 'does not overwrite the purchase date' do
+            expect( shipment.purchase_date ).to eq '2013-12-01'
+          end
+          
+        end
+        
+        describe 'already ordered' do
+
+          let( :shipment ) { Shipment.new( { :order_date => '2013-12-01' } ) }
+          
+          it 'does not overwrite the order date' do
+            expect( shipment.order_date ).to eq '2013-12-01'
+          end
+          
         end
 
       end
