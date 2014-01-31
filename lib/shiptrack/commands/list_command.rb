@@ -8,10 +8,10 @@ module ShipTrack
       super( 'list' )
       describe 'Lists shipments and states'
       handle_no_parameters
-      handle_option :ordered, { :type => :flag }
-      handle_option :paid, { :type => :flag }
-      handle_option :shipped, { :type => :flag }
-      handle_option :received, { :type => :flag }
+      handle_option CommandOption.new( :ordered, :flag )
+      handle_option CommandOption.new( :paid, :flag )
+      handle_option CommandOption.new( :shipped, :flag )
+      handle_option CommandOption.new( :received, :flag )
     end
 
     def run( parameters, configuration, options )
