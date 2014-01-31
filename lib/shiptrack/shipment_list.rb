@@ -30,7 +30,7 @@ module ShipTrack
     end
     
     def each
-      i = 1
+      i = 0
       @shipments.each do |s|
         yield i, s
         i += 1
@@ -38,7 +38,7 @@ module ShipTrack
     end
     
     def get_by_index( index )
-      @shipments[ index - 1 ]
+      @shipments[ index ]
     end
     
   end

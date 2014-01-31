@@ -21,7 +21,7 @@ module ShipTrack
     
     def run( params, configuration, options )
       all_shipments = ShipmentList.load( configuration[ :active_shipments_filepath ] )
-      shipment = all_shipments.get_by_index( params[ :index ] )
+      shipment = all_shipments.get_by_index( params[ :index ] - 1 )
       update_order( shipment, options )
       update_payment( shipment, options )
       update_shipping( shipment, options )

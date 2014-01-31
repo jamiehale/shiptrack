@@ -10,7 +10,7 @@ module ShipTrack
     
     def run( params, configuration, options )
       all_shipments = ShipmentList.load( configuration[ :active_shipments_filepath ] )
-      dump_details( all_shipments.get_by_index( params[ :index ] ) )
+      dump_details( all_shipments.get_by_index( params[ :index ] - 1 ) )
     end
     
     private

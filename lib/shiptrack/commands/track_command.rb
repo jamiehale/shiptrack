@@ -12,7 +12,7 @@ module ShipTrack
     
     def run( params, configuration, options )
       all_shipments = ShipmentList.load( configuration[ :active_shipments_filepath ] )
-      shipment = all_shipments.get_by_index( params[ :index ] )
+      shipment = all_shipments.get_by_index( params[ :index ] - 1 )
       Launchy.open( tracking_url_from_shipment( shipment ) )
     end
     

@@ -11,7 +11,7 @@ module ShipTrack
     
     def run( params, configuration, options )
       shipment_list = ShipmentList.load( configuration[ :active_shipments_filepath ] )
-      shipment = shipment_list.get_by_index( params[ :index ] )
+      shipment = shipment_list.get_by_index( params[ :index ] - 1 )
       if options[ :date ].nil?
         shipment.receive_date = DateTime.now.strftime( '%Y-%m-%d' )
       else

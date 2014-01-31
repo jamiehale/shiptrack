@@ -18,7 +18,7 @@ module ShipTrack
       all_shipments = ShipmentList.load( configuration[ :active_shipments_filepath ] )
       all_shipments.each do |i,s|
         if selected?( s, options )
-          list_shipment( i, s )
+          list_shipment( i + 1, s )
         end
       end
     end
