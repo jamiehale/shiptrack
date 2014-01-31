@@ -8,7 +8,7 @@ module ShipTrack
       handle_no_parameters
     end
     
-    def run( parameters, options )
+    def run( parameters, configuration, options )
       puts "#{$program} version #{$VERSION}"
     end
     
