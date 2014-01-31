@@ -5,7 +5,7 @@ module ShipTrack
     def initialize
       super( 'details' )
       describe 'Shows shipment details'
-      handle_parameters [ [ :index, :int ] ]
+      handle_parameters [ CommandParameter.new( :index, :int ) ]
     end
     
     def run( params, configuration, options )
