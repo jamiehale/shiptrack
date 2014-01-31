@@ -11,4 +11,5 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.executables << 'shiptrack'
   s.add_runtime_dependency 'launchy', '>= 2.4.2'
+  s.add_development_dependency 'rspec', '>= 2.14.1'
 end
