@@ -17,6 +17,10 @@ module ShipTrack
       @stream.puts "Received: #{shipment.receive_date}" unless shipment.receive_date.nil?
     end
     
+    def dump_list_line( index, shipment )
+      @stream.puts "#{index}: #{shipment.name} (from #{shipment.vendor}) [#{shipment.state}]"
+    end
+    
   end
   
 end

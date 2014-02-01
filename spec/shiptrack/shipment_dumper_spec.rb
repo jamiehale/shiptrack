@@ -27,7 +27,7 @@ module ShipTrack
       ShipmentDumper.new
     end
     
-    describe '#dump_details' do
+    describe '#dump' do
       
       let( :stream ) { LoggingStream.new }
       let( :dumper ) { ShipmentDumper.new( stream ) }
@@ -84,6 +84,43 @@ module ShipTrack
       
     end
     
+    describe '#dump_list_line' do
+      
+      let( :stream ) { LoggingStream.new }
+      let( :dumper ) { ShipmentDumper.new( stream ) }
+      let( :shipment ) { double( 'shipment' ) }
+      
+      before( :each ) do
+        shipment.stub( :name ).and_return( 'Something' )
+        shipment.stub( :state ).and_return( 'RECEIVED' )
+        shipment.stub( :vendor ).and_return( 'Somebody' )
+        shipment.stub( :order_date ).and_return( '2014-01-01' )
+        shipment.stub( :purchase_date ).and_return( '2014-01-02' )
+        shipment.stub( :ship_date ).and_return( '2014-01-03' )
+        shipment.stub( :ship_method ).and_return( 'UPS' )
+        shipment.stub( :ship_tracking_number ).and_return( '12345' )
+        shipment.stub( :receive_date ).and_return( '2014-01-04' )
+        dumper.dump_list_line( 172, shipment )
+      end
+      
+      it 'dumps the index' do
+        expect( stream.includes? '172' ).to be_true
+      end
+      
+      it 'dumps the shipment name' do
+        expect( stream.includes? 'Something' ).to be_true
+      end
+      
+      it 'dumps the vendor' do
+        expect( stream.includes? 'Somebody' ).to be_true
+      end
+      
+      it 'dumps the state' do
+        expect( stream.includes? 'RECEIVED' ).to be_true
+      end
+      
+    end
+      
   end
   
 end

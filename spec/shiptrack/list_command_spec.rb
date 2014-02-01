@@ -4,10 +4,15 @@ module ShipTrack
   
   describe ListCommand do
     
+    let( :dumper ) { double( 'dumper' ) }
+    let( :command ) { ListCommand.new( dumper ) }
+    
+    before( :each ) do
+      dumper.stub( :dump_list_line )
+    end
+    
     describe '.initialize' do
       
-      let( :command ) { ListCommand.new }
-    
       it 'has a name' do
         expect( command.name ).to eq 'list'
       end
@@ -48,7 +53,6 @@ module ShipTrack
     
     describe '#run' do
       
-      let( :command ) { ListCommand.new }
       let( :params ) { {} }
       let( :configuration ) { { :active_shipments_filepath => 'some/path' } }
       let( :shipment_list ) { double( 'shipment_list' ) }
@@ -59,11 +63,15 @@ module ShipTrack
         shipment_list.stub( :each ).and_yield( 0, shipment )
         shipment.stub( :name )
         shipment.stub( :state )
-        $stdout.stub( :puts )
       end
       
       it 'loads the active shipment list' do
         ShipmentList.should_receive( :load ).with( 'some/path' )
+        command.run( params, configuration, {} )
+      end
+      
+      it 'dumps the shipment' do
+        dumper.should_receive( :dump_list_line ).with( 1, shipment )
         command.run( params, configuration, {} )
       end
       

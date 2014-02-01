@@ -23,9 +23,9 @@ module ShipTrack
   command_processor = CommandProcessor.initialize do
     handle HelpCommand.new
     handle VersionCommand.new
-    handle ListCommand.new
+    handle ListCommand.new( ShipmentDumper.new )
     handle PurchaseCommand.new
-    handle DetailsCommand.new
+    handle DetailsCommand.new( ShipmentDumper.new )
     handle UpdateCommand.new
     handle OrderCommand.new
     handle PaidCommand.new
