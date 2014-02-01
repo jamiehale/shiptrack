@@ -4,10 +4,15 @@ module ShipTrack
   
   describe DetailsCommand do
     
+    let( :dumper ) { double( 'dumper' ) }
+    let( :command ) { DetailsCommand.new( dumper ) }
+    
+    before( :each ) do
+      dumper.stub( :dump )
+    end
+    
     describe '.initialize' do
       
-      let( :command ) { DetailsCommand.new }
-    
       it 'has a name' do
         expect( command.name ).to eq 'details'
       end
@@ -32,7 +37,6 @@ module ShipTrack
     
     describe '#run' do
       
-      let( :command ) { DetailsCommand.new }
       let( :params ) { { :index => 1 } }
       let( :configuration ) { { :active_shipments_filepath => 'some/path' } }
       let( :shipment_list ) { double( 'shipment_list' ) }
@@ -61,6 +65,11 @@ module ShipTrack
       it 'fails if the index is invalid' do
         shipment_list.stub( :get_by_index ).and_raise 'Invalid index'
         expect { command.run( params, configuration, {} ) }.to raise_error 'Invalid index'
+      end
+      
+      it 'defers to the dumper for output' do
+        dumper.should_receive( :dump ).with( shipment )
+        command.run( params, configuration, {} )
       end
       
     end
