@@ -20,7 +20,7 @@ module ShipTrack
     end
     
     def each_command( &blk )
-      @commands.values.sort{|a,b| a.name <=> b.name}.each( &blk )
+      sorted_commands.each( &blk )
     end
     
     def handles?( name )
@@ -36,6 +36,12 @@ module ShipTrack
       command_processor.instance_eval( &blk )
       command_processor
     end
+    
+    private
+    
+      def sorted_commands
+        @commands.values.sort{|a,b| a.name <=> b.name}
+      end
     
   end
   
