@@ -5,6 +5,7 @@ require 'shiptrack/command_option'
 require 'shiptrack/configuration'
 require 'shiptrack/shipment'
 require 'shiptrack/shipment_list'
+require 'shiptrack/shipment_dumper'
 
 require 'shiptrack/commands/help_command'
 require 'shiptrack/commands/version_command'
