@@ -1,8 +1,6 @@
 * Tidy!!
 * Make shiptrack list prettier
-* Format shiptrack details nicer
 * version the file format?
-* refactor parameters and options into objects
 ** dynamically rename options with underscores to dashes
 * command to cancel an order
 * archive command to archive canceled orders
