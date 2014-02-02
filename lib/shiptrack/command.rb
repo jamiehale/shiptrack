@@ -114,10 +114,10 @@ module ShipTrack
         @parameter_sets.each do |parameter_set|
           if read_parameters.size == parameter_set.size
             0.upto( read_parameters.size - 1 ) do |i|
-              if parameter_set[ i ][ 1 ] == :int
-                parameters[ parameter_set[ i ][ 0 ] ] = read_parameters[ i ].to_i
+              if parameter_set[ i ].type == :int
+                parameters[ parameter_set[ i ].name ] = read_parameters[ i ].to_i
               else
-                parameters[ parameter_set[ i ][ 0 ] ] = read_parameters[ i ]
+                parameters[ parameter_set[ i ].name ] = read_parameters[ i ]
               end
             end
             return parameters
