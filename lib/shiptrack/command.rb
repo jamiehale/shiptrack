@@ -57,7 +57,7 @@ module ShipTrack
       puts @description
       puts 'Usage:'
       @parameter_sets.each do |parameter_set|
-        puts "       sdoc #{name}#{options_tag}#{parameter_list(parameter_set)}"
+        puts "       shiptrack #{name}#{options_tag}#{parameter_list(parameter_set)}"
       end
       describe_options
       exit
