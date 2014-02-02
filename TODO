@@ -13,6 +13,5 @@
 * cucumber?
 * sanity check "pay" on "shipped" shipment for instance
 * push loading of shipment list down into command? or module?
-* move web tracking urls to configuration
 * track history on each shipment
 * integrate FactoryGirl

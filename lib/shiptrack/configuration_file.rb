@@ -62,7 +62,13 @@ module ShipTrack
     
     def self.defaults
       {
-        :path => "#{ENV['HOME']}/.shiptrack"
+        :path => "#{ENV['HOME']}/.shiptrack",
+        :tracking_urls => {
+          'UPS' => 'http://wwwapps.ups.com/WebTracking/track?trackNums=!!!',
+          'Purolator' => 'http://www.purolator.com/purolator/ship-track/tracking-summary.page?search=!!!',
+          'Fedex' => 'https://www.fedex.com/fedextrack/?tracknumbers=!!!&locale=en_CA&cntry_code=ca_english',
+          'Canada Post' => 'http://www.canadapost.ca/cpotools/apps/track/business/findByTrackNumber?trackingNumber=!!!&amp;LOCALE=en'
+        }
       }
     end
 

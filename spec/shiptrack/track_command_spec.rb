@@ -51,7 +51,9 @@ module ShipTrack
       
       let( :command ) { TrackCommand.new }
       let( :params ) { { :index => 1 } }
-      let( :configuration ) { { :active_shipments_filepath => 'some/path' } }
+      let( :configuration ) { {
+        :active_shipments_filepath => 'some/path',
+        :tracking_urls => { :UPS => 'some/url?!!!' } } }
       let( :shipment_list ) { double( 'shipment_list' ) }
       let( :shipment ) { double( 'shipment' ) }
       
@@ -59,7 +61,7 @@ module ShipTrack
         ShipmentList.stub( :load ).and_return( shipment_list )
         shipment_list.stub( :get_by_index ).and_return( shipment )
         shipment.stub( :ship_method ).and_return( 'UPS' )
-        shipment.stub( :ship_tracking_number )
+        shipment.stub( :ship_tracking_number ).and_return( '12345' )
         Launchy.stub( :open )
       end
       
@@ -69,7 +71,7 @@ module ShipTrack
       end
       
       it 'should defer to Launchy to show web page' do
-        Launchy.should_receive( :open )
+        Launchy.should_receive( :open ).with( 'some/url?12345' )
         command.run( params, configuration, {} )
       end
       
