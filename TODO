@@ -2,7 +2,6 @@
 * Make shiptrack list prettier
 * Format shiptrack details nicer
 * version the file format?
-* license file + GPL boilerplate
 * refactor parameters and options into objects
 ** dynamically rename options with underscores to dashes
 * command to cancel an order
