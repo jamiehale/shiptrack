@@ -22,6 +22,10 @@ module ShipTrack
       end
     end
     
+    def each( &blk )
+      @items.each( &blk )
+    end
+    
     def self.load( filename )
       return ConfigurationFile.new( YAML.load_file( filename ) ) if File.exists?( filename )
       new_configuration_file = ConfigurationFile.new( defaults )

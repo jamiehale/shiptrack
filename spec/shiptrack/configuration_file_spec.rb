@@ -117,6 +117,15 @@ module ShipTrack
       end
       
     end
+    
+    describe 'iteration' do
+      
+      it 'does each' do
+        configuration_file = ConfigurationFile.new( 'path' => 'some/file', 'group' => [ 'first', 'second', 'third' ] )
+        expect{ |b| configuration_file.each( &b ) }.to yield_successive_args( [ :path, 'some/file' ], [ :group, [ 'first', 'second', 'third' ] ] )
+      end
+      
+    end
       
   end
   
