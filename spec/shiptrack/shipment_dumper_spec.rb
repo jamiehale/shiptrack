@@ -43,6 +43,9 @@ module ShipTrack
         shipment.stub( :ship_method ).and_return( 'UPS' )
         shipment.stub( :ship_tracking_number ).and_return( '12345' )
         shipment.stub( :receive_date ).and_return( '2014-01-04' )
+        shipment.stub( :paid? ).and_return( true )
+        shipment.stub( :shipped? ).and_return( true )
+        shipment.stub( :received? ).and_return( true )
         dumper.dump( shipment )
       end
       
