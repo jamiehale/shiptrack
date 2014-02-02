@@ -5,11 +5,6 @@
 * command to cancel an order
 * archive command to archive canceled orders
 * --canceled to list command
-* standardize states, verbs, member variables
-** purchase
-** pay
-** payment_date
-* remove ship_ prefix from method and tracking_number
 * cucumber?
 * sanity check "pay" on "shipped" shipment for instance
 * push loading of shipment list down into command? or module?

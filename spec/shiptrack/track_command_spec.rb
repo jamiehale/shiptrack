@@ -61,7 +61,7 @@ module ShipTrack
         ShipmentList.stub( :load ).and_return( shipment_list )
         shipment_list.stub( :get_by_index ).and_return( shipment )
         shipment.stub( :ship_method ).and_return( 'UPS' )
-        shipment.stub( :ship_tracking_number ).and_return( '12345' )
+        shipment.stub( :tracking_number ).and_return( '12345' )
         Launchy.stub( :open )
       end
       

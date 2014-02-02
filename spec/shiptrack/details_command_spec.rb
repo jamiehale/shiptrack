@@ -66,11 +66,11 @@ module ShipTrack
         shipment.stub( :state ).and_return( 'SHIPPED' )
         shipment.stub( :vendor ).and_return( 'Somebody' )
         shipment.stub( :order_date ).and_return( '2014-01-01' )
-        shipment.stub( :purchase_date ).and_return( '2014-01-02' )
+        shipment.stub( :payment_date ).and_return( '2014-01-02' )
         shipment.stub( :ship_date ).and_return( '2014-01-03' )
         shipment.stub( :ship_method ).and_return( 'UPS' )
-        shipment.stub( :ship_tracking_number ).and_return( '12345' )
-        shipment.stub( :receive_date ).and_return( nil )
+        shipment.stub( :tracking_number ).and_return( '12345' )
+        shipment.stub( :receipt_date ).and_return( nil )
         $stdout.stub( :puts )
       end
       

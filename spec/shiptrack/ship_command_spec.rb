@@ -106,8 +106,8 @@ module ShipTrack
       end
       
       it 'sets a tracking number if provided' do
-        shipment.stub( :ship_tracking_number= )
-        shipment.should_receive( :ship_tracking_number= ).with( '12345' )
+        shipment.stub( :tracking_number= )
+        shipment.should_receive( :tracking_number= ).with( '12345' )
         command.run( params, configuration, { :tracking_number => '12345' } )
       end
       

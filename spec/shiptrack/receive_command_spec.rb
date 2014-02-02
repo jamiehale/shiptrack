@@ -63,7 +63,7 @@ module ShipTrack
         ShipmentList.stub( :load ).and_return( shipment_list )
         shipment_list.stub( :get_by_index ).and_return( shipment )
         shipment_list.stub( :save )
-        shipment.stub( :receive_date= )
+        shipment.stub( :receipt_date= )
       end
       
       it 'loads the active shipment list' do
@@ -72,12 +72,12 @@ module ShipTrack
       end
       
       it 'sets the receipt date on the shipment' do
-        shipment.should_receive( :receive_date= ).with( DateTime.now.strftime( '%Y-%m-%d' ) )
+        shipment.should_receive( :receipt_date= ).with( DateTime.now.strftime( '%Y-%m-%d' ) )
         command.run( params, configuration, {} )
       end
       
       it 'sets the receipt date from an option' do
-        shipment.should_receive( :receive_date= ).with( '2000-01-01' )
+        shipment.should_receive( :receipt_date= ).with( '2000-01-01' )
         command.run( params, configuration, { :date => '2000-01-01' } )
       end
       

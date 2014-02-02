@@ -26,11 +26,11 @@ module ShipTrack
       handle_option CommandOption.new( :name, :string )
       handle_option CommandOption.new( :vendor, :string )
       handle_option CommandOption.new( :order_date, :string )
-      handle_option CommandOption.new( :purchase_date, :string )
+      handle_option CommandOption.new( :payment_date, :string )
       handle_option CommandOption.new( :ship_date, :string )
       handle_option CommandOption.new( :ship_method, :string )
       handle_option CommandOption.new( :tracking_number, :string )
-      handle_option CommandOption.new( :receive_date, :string )
+      handle_option CommandOption.new( :receipt_date, :string )
       handle_option CommandOption.new( :clear_receipt, :flag )
       handle_option CommandOption.new( :clear_shipping, :flag )
       handle_option CommandOption.new( :clear_payment, :flag )
@@ -58,26 +58,26 @@ module ShipTrack
       end
       
       def update_payment( shipment, options )
-        shipment.purchase_date = options[ :purchase_date ] unless options[ :purchase_date ].nil?
+        shipment.payment_date = options[ :payment_date ] unless options[ :payment_date ].nil?
       end
       
       def update_shipping( shipment, options )
         shipment.ship_date = options[ :ship_date ] unless options[ :ship_date ].nil?
         shipment.ship_method = options[ :ship_method ] unless options[ :ship_method ].nil?
-        shipment.ship_tracking_number = options[ :tracking_number ] unless options[ :tracking_number ].nil?
+        shipment.tracking_number = options[ :tracking_number ] unless options[ :tracking_number ].nil?
       end
       
       def update_receipt( shipment, options )
-        shipment.receive_date = options[ :receive_date ] unless options[ :receive_date ].nil?
+        shipment.receipt_date = options[ :receipt_date ] unless options[ :receipt_date ].nil?
       end
       
       def clear_payment( shipment, options )
         unless options[ :clear_payment ].nil?
-          shipment.purchase_date = nil
+          shipment.payment_date = nil
           shipment.ship_date = nil
           shipment.ship_method = nil
-          shipment.ship_tracking_number = nil
-          shipment.receive_date = nil
+          shipment.tracking_number = nil
+          shipment.receipt_date = nil
         end
       end
       
@@ -85,14 +85,14 @@ module ShipTrack
         unless options[ :clear_shipping ].nil?
           shipment.ship_date = nil
           shipment.ship_method = nil
-          shipment.ship_tracking_number = nil
-          shipment.receive_date = nil
+          shipment.tracking_number = nil
+          shipment.receipt_date = nil
         end
       end
       
       def clear_receipt( shipment, options )
         unless options[ :clear_receipt ].nil?
-          shipment.receive_date = nil
+          shipment.receipt_date = nil
         end
       end
     

@@ -57,8 +57,8 @@ module ShipTrack
         expect( command.options ).to include CommandOption.new( :order_date, :string )
       end
       
-      it 'handles a purchase_date option' do
-        expect( command.options ).to include CommandOption.new( :purchase_date, :string )
+      it 'handles a payment_date option' do
+        expect( command.options ).to include CommandOption.new( :payment_date, :string )
       end
       
       it 'handles a ship_date option' do
@@ -73,8 +73,8 @@ module ShipTrack
         expect( command.options ).to include CommandOption.new( :tracking_number, :string )
       end
       
-      it 'handles a receive_date option' do
-        expect( command.options ).to include CommandOption.new( :receive_date, :string )
+      it 'handles a receipt_date option' do
+        expect( command.options ).to include CommandOption.new( :receipt_date, :string )
       end
       
       it 'handles a clear_receipt option' do
@@ -108,7 +108,7 @@ module ShipTrack
         shipment_list.stub( :get_by_index ).and_return( shipment )
         shipment_list.stub( :save )
         shipment.stub( :name= )
-        shipment.stub( :purchase_date= )
+        shipment.stub( :payment_date= )
       end
       
       it 'loads the active shipment list' do
@@ -159,12 +159,12 @@ module ShipTrack
         
       end
       
-      describe 'updating purchase date' do
+      describe 'updating payment date' do
         
-        let( :options ) { { :purchase_date => '2013-01-01' } }
+        let( :options ) { { :payment_date => '2013-01-01' } }
         
         it 'sets the new purchase date' do
-          shipment.should_receive( :purchase_date= ).with( '2013-01-01' )
+          shipment.should_receive( :payment_date= ).with( '2013-01-01' )
           command.run( params, configuration, options )
         end
         
@@ -197,7 +197,7 @@ module ShipTrack
         let( :options ) { { :tracking_number => '12345' } }
         
         it 'sets the new tracking number' do
-          shipment.should_receive( :ship_tracking_number= ).with( '12345' )
+          shipment.should_receive( :tracking_number= ).with( '12345' )
           command.run( params, configuration, options )
         end
         
@@ -205,10 +205,10 @@ module ShipTrack
       
       describe 'updating receipt date' do
         
-        let( :options ) { { :receive_date => '2013-01-01' } }
+        let( :options ) { { :receipt_date => '2013-01-01' } }
         
         it 'sets the new receipt date' do
-          shipment.should_receive( :receive_date= ).with( '2013-01-01' )
+          shipment.should_receive( :receipt_date= ).with( '2013-01-01' )
           command.run( params, configuration, options )
         end
         
@@ -219,7 +219,7 @@ module ShipTrack
         let( :options ) { { :clear_receipt => true } }
         
         it 'clears the receipt date' do
-          shipment.should_receive( :receive_date= ).with( nil )
+          shipment.should_receive( :receipt_date= ).with( nil )
           command.run( params, configuration, options )
         end
         
@@ -232,8 +232,8 @@ module ShipTrack
         before( :each ) do
           shipment.stub( :ship_date= )
           shipment.stub( :ship_method= )
-          shipment.stub( :ship_tracking_number= )
-          shipment.stub( :receive_date= )
+          shipment.stub( :tracking_number= )
+          shipment.stub( :receipt_date= )
         end
         
         it 'clears the ship date' do
@@ -247,12 +247,12 @@ module ShipTrack
         end
         
         it 'clears the tracking number' do
-          shipment.should_receive( :ship_tracking_number= ).with( nil )
+          shipment.should_receive( :tracking_number= ).with( nil )
           command.run( params, configuration, options )
         end
         
         it 'clears the receipt date' do
-          shipment.should_receive( :receive_date= ).with( nil )
+          shipment.should_receive( :receipt_date= ).with( nil )
           command.run( params, configuration, options )
         end
         
@@ -263,15 +263,15 @@ module ShipTrack
         let( :options ) { { :clear_payment => true } }
         
         before( :each ) do
-          shipment.stub( :purchase_date= )
+          shipment.stub( :payment_date= )
           shipment.stub( :ship_date= )
           shipment.stub( :ship_method= )
-          shipment.stub( :ship_tracking_number= )
-          shipment.stub( :receive_date= )
+          shipment.stub( :tracking_number= )
+          shipment.stub( :receipt_date= )
         end
         
-        it 'clears the purchase date' do
-          shipment.should_receive( :purchase_date= ).with( nil )
+        it 'clears the payment date' do
+          shipment.should_receive( :payment_date= ).with( nil )
           command.run( params, configuration, options )
         end
         
@@ -286,12 +286,12 @@ module ShipTrack
         end
         
         it 'clears the tracking number' do
-          shipment.should_receive( :ship_tracking_number= ).with( nil )
+          shipment.should_receive( :tracking_number= ).with( nil )
           command.run( params, configuration, options )
         end
         
         it 'clears the receipt date' do
-          shipment.should_receive( :receive_date= ).with( nil )
+          shipment.should_receive( :receipt_date= ).with( nil )
           command.run( params, configuration, options )
         end
         

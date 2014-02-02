@@ -39,8 +39,8 @@ module ShipTrack
         @shipment.order_date.should be_nil
       end
       
-      it 'has no purchase_date' do
-        @shipment.purchase_date.should be_nil
+      it 'has no payment_date' do
+        @shipment.payment_date.should be_nil
       end
       
       it 'has no ship_date' do
@@ -52,11 +52,11 @@ module ShipTrack
       end
       
       it 'has no tracking_number' do
-        @shipment.ship_tracking_number.should be_nil
+        @shipment.tracking_number.should be_nil
       end
       
-      it 'has no receive_date' do
-        @shipment.receive_date.should be_nil
+      it 'has no receipt_date' do
+        @shipment.receipt_date.should be_nil
       end
     
     end
@@ -69,11 +69,11 @@ module ShipTrack
             :name => 'Something',
             :vendor => 'Somebody',
             :order_date => '2014-01-01',
-            :purchase_date => '2014-01-02',
+            :payment_date => '2014-01-02',
             :ship_date => '2014-01-03',
             :ship_method => 'UPS',
-            :ship_tracking_number => '12345',
-            :receive_date => '2014-01-04'
+            :tracking_number => '12345',
+            :receipt_date => '2014-01-04'
           }
         )
       end
@@ -90,8 +90,8 @@ module ShipTrack
         @shipment.order_date.should == '2014-01-01'
       end
       
-      it 'has a purchase_date' do
-        @shipment.purchase_date.should == '2014-01-02'
+      it 'has a payment_date' do
+        @shipment.payment_date.should == '2014-01-02'
       end
       
       it 'has a ship_date' do
@@ -102,12 +102,12 @@ module ShipTrack
         @shipment.ship_method.should == 'UPS'
       end
       
-      it 'has a ship_tracking_number' do
-        @shipment.ship_tracking_number.should == '12345'
+      it 'has a tracking_number' do
+        @shipment.tracking_number.should == '12345'
       end
       
-      it 'has a receive_date' do
-        @shipment.receive_date.should == '2014-01-04'
+      it 'has a receipt_date' do
+        @shipment.receipt_date.should == '2014-01-04'
       end
       
       describe 'to_hash' do
@@ -132,8 +132,8 @@ module ShipTrack
           @hash[ :order_date ].should == '2014-01-01'
         end
         
-        it 'has a purchase_date key' do
-          @hash[ :purchase_date ].should == '2014-01-02'
+        it 'has a payment_date key' do
+          @hash[ :payment_date ].should == '2014-01-02'
         end
         
         it 'has a ship_date key' do
@@ -144,12 +144,12 @@ module ShipTrack
           @hash[ :ship_method ].should == 'UPS'
         end
         
-        it 'has a ship_tracking_number key' do
-          @hash[ :ship_tracking_number ].should == '12345'
+        it 'has a tracking_number key' do
+          @hash[ :tracking_number ].should == '12345'
         end
         
-        it 'has a receive_date key' do
-          @hash[ :receive_date ].should == '2014-01-04'
+        it 'has a receipt_date key' do
+          @hash[ :receipt_date ].should == '2014-01-04'
         end
         
       end
@@ -178,10 +178,10 @@ module ShipTrack
         
       end
       
-      describe 'with a purchase_date and order_date and no other dates' do
+      describe 'with a payment_date and order_date and no other dates' do
         
         before( :each ) do
-          @shipment = Shipment.new( { :order_date => '2014-01-01', :purchase_date => '2014-01-02' } )
+          @shipment = Shipment.new( { :order_date => '2014-01-01', :payment_date => '2014-01-02' } )
         end
       
         it 'has PAID state' do
@@ -194,10 +194,10 @@ module ShipTrack
         
       end
       
-      describe 'with a ship_date, purchase_date, and order_date and no other dates' do
+      describe 'with a ship_date, payment_date, and order_date and no other dates' do
         
         before( :each ) do
-          @shipment = Shipment.new( { :order_date => '2014-01-01', :purchase_date => '2014-01-02', :ship_date => '2014-01-03' } )
+          @shipment = Shipment.new( { :order_date => '2014-01-01', :payment_date => '2014-01-02', :ship_date => '2014-01-03' } )
         end
       
         it 'has SHIPPED state' do
@@ -210,10 +210,10 @@ module ShipTrack
         
       end
       
-      describe 'with a received_date, ship_date, purchase_date, and order_date and no other dates' do
+      describe 'with a receipt_date, ship_date, payment_date, and order_date and no other dates' do
         
         before( :each ) do
-          @shipment = Shipment.new( { :order_date => '2014-01-01', :purchase_date => '2014-01-02', :ship_date => '2014-01-03', :receive_date => '2014-01-04' } )
+          @shipment = Shipment.new( { :order_date => '2014-01-01', :payment_date => '2014-01-02', :ship_date => '2014-01-03', :receipt_date => '2014-01-04' } )
         end
         
         it 'has RECEIVED state' do
@@ -235,11 +235,11 @@ module ShipTrack
       describe 'purchasing' do
 
         before( :each ) do
-          shipment.purchase_date = '2014-01-01'
+          shipment.payment_date = '2014-01-01'
         end
         
         it 'sets purchase date' do
-          shipment.purchase_date.should == '2014-01-01'
+          shipment.payment_date.should == '2014-01-01'
         end
         
         it 'sets order date too' do
@@ -268,8 +268,8 @@ module ShipTrack
           shipment.ship_date.should == '2014-01-02'
         end
         
-        it 'sets purchase_date too' do
-          shipment.purchase_date.should == '2014-01-02'
+        it 'sets payment_date too' do
+          shipment.payment_date.should == '2014-01-02'
         end
         
         it 'sets order_date too' do
@@ -278,10 +278,10 @@ module ShipTrack
         
         describe 'already purchased' do
           
-          let( :shipment ) { Shipment.new( { :purchase_date => '2013-12-01' } ) }
+          let( :shipment ) { Shipment.new( { :payment_date => '2013-12-01' } ) }
           
           it 'does not overwrite the purchase date' do
-            expect( shipment.purchase_date ).to eq '2013-12-01'
+            expect( shipment.payment_date ).to eq '2013-12-01'
           end
           
         end
@@ -301,19 +301,19 @@ module ShipTrack
       describe 'receiving' do
         
         before( :each ) do
-          shipment.receive_date = '2014-01-03'
+          shipment.receipt_date = '2014-01-03'
         end
       
-        it 'sets receive_date' do
-          shipment.receive_date.should == '2014-01-03'
+        it 'sets receipt_date' do
+          shipment.receipt_date.should == '2014-01-03'
         end
         
         it 'sets ship_date too' do
           shipment.ship_date.should == '2014-01-03'
         end
 
-        it 'sets purchase_date too' do
-          shipment.purchase_date.should == '2014-01-03'
+        it 'sets payment_date too' do
+          shipment.payment_date.should == '2014-01-03'
         end
 
         it 'sets order_date too' do
@@ -332,10 +332,10 @@ module ShipTrack
         
         describe 'already purchased' do
           
-          let( :shipment ) { Shipment.new( { :purchase_date => '2013-12-01' } ) }
+          let( :shipment ) { Shipment.new( { :payment_date => '2013-12-01' } ) }
           
           it 'does not overwrite the purchase date' do
-            expect( shipment.purchase_date ).to eq '2013-12-01'
+            expect( shipment.payment_date ).to eq '2013-12-01'
           end
           
         end

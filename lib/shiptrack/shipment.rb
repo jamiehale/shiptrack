@@ -20,8 +20,8 @@ module ShipTrack
   class Shipment
     
     attr_accessor :name, :vendor, :order_date
-    attr_reader :purchase_date, :ship_date, :receive_date
-    attr_accessor :ship_method, :ship_tracking_number
+    attr_reader :payment_date, :ship_date, :receipt_date
+    attr_accessor :ship_method, :tracking_number
     
     def initialize( params = {} )
       fields.each do |field_name|
@@ -33,21 +33,21 @@ module ShipTrack
       fields.inject( {} ) { |d,n| d[ n ] = instance_variable_get( "@#{n}" ) unless instance_variable_get( "@#{n}" ).nil? ; d }
     end
     
-    def purchase_date=( date )
-      @purchase_date = date
+    def payment_date=( date )
+      @payment_date = date
       @order_date = date if @order_date.nil?
     end
     
     def ship_date=( date )
       @ship_date = date
-      @purchase_date = date if @purchase_date.nil?
+      @payment_date = date if @payment_date.nil?
       @order_date = date if @order_date.nil?
     end
     
-    def receive_date=( date )
-      @receive_date = date
+    def receipt_date=( date )
+      @receipt_date = date
       @ship_date = date if @ship_date.nil?
-      @purchase_date = date if @purchase_date.nil?
+      @payment_date = date if @payment_date.nil?
       @order_date = date if @order_date.nil?
     end
     
@@ -56,7 +56,7 @@ module ShipTrack
     end
     
     def paid?
-      !purchase_date.nil?
+      !payment_date.nil?
     end
     
     def shipped?
@@ -64,7 +64,7 @@ module ShipTrack
     end
     
     def received?
-      !receive_date.nil?
+      !receipt_date.nil?
     end
     
     def state
@@ -88,11 +88,11 @@ module ShipTrack
           :name,
           :vendor,
           :order_date,
-          :purchase_date,
+          :payment_date,
           :ship_date,
           :ship_method,
-          :ship_tracking_number,
-          :receive_date
+          :tracking_number,
+          :receipt_date
         ]
       end
       

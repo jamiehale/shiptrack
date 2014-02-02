@@ -30,15 +30,15 @@ module ShipTrack
       line 'Ordered', shipment.order_date unless shipment.order_date.nil?
       if shipment.paid?
         space
-        line 'Paid', shipment.purchase_date unless shipment.purchase_date.nil?
+        line 'Paid', shipment.payment_date unless shipment.payment_date.nil?
         if shipment.shipped?
           space
           line 'Shipped', shipment.ship_date unless shipment.ship_date.nil?
           line 'Method', shipment.ship_method unless shipment.ship_method.nil?
-          line 'Tracking Number', shipment.ship_tracking_number unless shipment.ship_tracking_number.nil?
+          line 'Tracking Number', shipment.tracking_number unless shipment.tracking_number.nil?
           if shipment.received?
             space
-            line 'Received', shipment.receive_date unless shipment.receive_date.nil?
+            line 'Received', shipment.receipt_date unless shipment.receipt_date.nil?
           end
         end
       end

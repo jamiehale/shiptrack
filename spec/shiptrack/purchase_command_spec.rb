@@ -65,7 +65,7 @@ module ShipTrack
       
       before( :each ) do
         Shipment.stub( :new ).and_return( shipment )
-        shipment.stub( :purchase_date= )
+        shipment.stub( :payment_date= )
         ShipmentList.stub( :load ).and_return( shipment_list )
         shipment_list.stub( :add )
         shipment_list.stub( :save )
@@ -76,13 +76,13 @@ module ShipTrack
         command.run( params, configuration, {} )
       end
       
-      it 'sets the purchase date on the shipment' do
-        shipment.should_receive( :purchase_date= ).with( DateTime.now.strftime( '%Y-%m-%d' ) )
+      it 'sets the payment date on the shipment' do
+        shipment.should_receive( :payment_date= ).with( DateTime.now.strftime( '%Y-%m-%d' ) )
         command.run( params, configuration, {} )
       end
       
-      it 'sets the purchase date from an option' do
-        shipment.should_receive( :purchase_date= ).with( '2000-01-01' )
+      it 'sets the payment date from an option' do
+        shipment.should_receive( :payment_date= ).with( '2000-01-01' )
         command.run( params, configuration, { :date => '2000-01-01' } )
       end
       

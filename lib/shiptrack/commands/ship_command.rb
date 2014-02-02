@@ -33,7 +33,7 @@ module ShipTrack
       shipment = shipment_list.get_by_index( params[ :index ] - 1 )
       shipment.ship_date = ship_date( options )
       shipment.ship_method = options[ :method ] unless options[ :method ].nil?
-      shipment.ship_tracking_number = options[ :tracking_number ] unless options[ :tracking_number ].nil?
+      shipment.tracking_number = options[ :tracking_number ] unless options[ :tracking_number ].nil?
       shipment_list.save( configuration[ :active_shipments_filepath ] )
     end
     

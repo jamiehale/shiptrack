@@ -29,13 +29,13 @@ module ShipTrack
     def run( params, configuration, options )
       shipment_list = ShipmentList.load( configuration[ :active_shipments_filepath ] )
       shipment = shipment_list.get_by_index( params[ :index ] - 1 )
-      shipment.purchase_date = purchase_date( options )
+      shipment.payment_date = payment_date( options )
       shipment_list.save( configuration[ :active_shipments_filepath ] )
     end
     
     private
     
-      def purchase_date( options )
+      def payment_date( options )
         return options[ :date ] unless options[ :date ].nil?
         DateTime.now.strftime( '%Y-%m-%d' )
       end

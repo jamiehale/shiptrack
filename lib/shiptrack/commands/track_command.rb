@@ -37,7 +37,7 @@ module ShipTrack
     
       def tracking_url_from_shipment( shipment, tracking_urls )
         raise "Unrecognized ship method (#{shipment.ship_method})" unless tracking_urls.has_key?( shipment.ship_method.to_sym )
-        tracking_urls[ shipment.ship_method.to_sym ].sub( /!!!/, shipment.ship_tracking_number )
+        tracking_urls[ shipment.ship_method.to_sym ].sub( /!!!/, shipment.tracking_number )
       end
     
   end

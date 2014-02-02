@@ -30,13 +30,13 @@ module ShipTrack
     def run( params, configuration, options )
       shipment = Shipment.new( { :name => params[ :name ] } )
       shipment.vendor = options[ :vendor ] unless options[ :vendor ].nil?
-      shipment.purchase_date = purchase_date( options )
+      shipment.payment_date = payment_date( options )
       add_to_active_shipment_list( shipment, configuration )
     end
     
     private
     
-      def purchase_date( options )
+      def payment_date( options )
         return options[ :date ] unless options[ :date ].nil?
         DateTime.now.strftime( '%Y-%m-%d' )
       end
