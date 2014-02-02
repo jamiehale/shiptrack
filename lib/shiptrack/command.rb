@@ -75,7 +75,7 @@ module ShipTrack
       if parameter_set.empty?
         ''
       else
-        ' ' + parameter_set.map{|p| '<' + p[ 0 ].to_s + '>'}.join( ' ' )
+        ' ' + parameter_set.map{|p| '<' + p.name.to_s + '>'}.join( ' ' )
       end
     end
     
