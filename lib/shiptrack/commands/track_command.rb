@@ -26,7 +26,8 @@ module ShipTrack
           "http://www.purolator.com/purolator/ship-track/tracking-summary.page?search=#{shipment.ship_tracking_number}"
         when 'Fedex'
           "https://www.fedex.com/fedextrack/?tracknumbers=#{shipment.ship_tracking_number}&locale=en_CA&cntry_code=ca_english"
-        #when 'Canada Post'
+        when 'Canada Post'
+          "http://www.canadapost.ca/cpotools/apps/track/business/findByTrackNumber?trackingNumber=#{shipment.ship_tracking_number}&amp;LOCALE=en"
         #when 'USPS'
         else
           raise "Unrecognized ship method (#{shipment.ship_method})"
