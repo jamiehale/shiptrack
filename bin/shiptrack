@@ -18,7 +18,7 @@ module ShipTrack
   configuration[ :archive_path ] = File.join( configuration[ :path ], 'archive' )
   configuration[ :active_archive_filepath ] = File.join( configuration[ :archive_path ], DateTime.now.strftime( 'archive_%Y-%m' ) )
 
-  FileUtils.mkdir configuration[ 'path' ] unless File.directory?( configuration[ 'path' ] )
+  FileUtils.mkdir configuration[ :path ] unless File.directory?( configuration[ :path ] )
   ShipmentList.new().save( configuration[ :active_shipments_filepath ] ) unless File.exists?( configuration[ :active_shipments_filepath ] )
   
   command_processor = CommandProcessor.initialize do
