@@ -15,3 +15,4 @@
 * push loading of shipment list down into command? or module?
 * track history on each shipment
 * integrate FactoryGirl
+* alias commands?
