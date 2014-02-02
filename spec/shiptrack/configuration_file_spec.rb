@@ -27,33 +27,61 @@ module ShipTrack
     
     describe 'loading' do
 
-      let( :yaml ) { {} }
-      let( :configuration_file ) { double( 'configuration_file' ) }
+      describe 'when the file exists' do
+        
+        let( :yaml ) { {} }
+        let( :configuration_file ) { double( 'configuration_file' ) }
+
+        before( :each ) do
+          YAML.stub( :load_file ).and_return( yaml )
+          File.stub( :exists? ).and_return( true )
+          ConfigurationFile.stub( :new ).and_return( configuration_file )
+        end
+        
+        it 'defers to YAML for loading' do
+          YAML.should_receive( :load_file ).with( 'some/file' )
+          ConfigurationFile.load( 'some/file' )
+        end
       
-      before( :each ) do
-        YAML.stub( :load_file ).and_return( yaml )
-        ConfigurationFile.stub( :new ).and_return( configuration_file )
+        it 'creates a new ConfigurationFile from the YAML' do
+          ConfigurationFile.should_receive( :new ).with( yaml )
+          ConfigurationFile.load( 'some/file' )
+        end
+      
+        it 'returns the new configuration file' do
+          new_configuration_file = ConfigurationFile.load( 'some/file' )
+          expect( new_configuration_file ).to eq( configuration_file )
+        end
+        
       end
       
-      it 'defers to YAML for loading' do
-        YAML.should_receive( :load_file ).with( 'some/file' )
-        ConfigurationFile.load( 'some/file' )
+      describe 'when the file does not exist' do
+
+        let( :configuration_file ) { double( 'configuration_file' ) }
+        
+        before( :each ) do
+          File.stub( :exists? ).and_return( false )
+          ConfigurationFile.stub( :new ).and_return( configuration_file )
+          configuration_file.stub( :save )
+        end
+        
+        it 'creates a new ConfigurationFile from defaults' do
+          ConfigurationFile.should_receive( :new ).with( ConfigurationFile.defaults ).and_return( configuration_file )
+          ConfigurationFile.load( 'some/file' )
+        end
+        
+        it 'writes the defaults out to the file' do
+          configuration_file.should_receive( :save ).with( 'some/file' )
+          ConfigurationFile.load( 'some/file' )
+        end
+        
+        it 'returns the defaults' do
+          result = ConfigurationFile.load( 'some/file' )
+          expect( result ).to eq( configuration_file )
+        end
+        
       end
-      
-      it 'creates a new ConfigurationFile from the YAML' do
-        ConfigurationFile.should_receive( :new ).with( yaml )
-        ConfigurationFile.load( 'some/file' )
-      end
-      
-      it 'returns the new configuration file' do
-        new_configuration_file = ConfigurationFile.load( 'some/file' )
-        expect( new_configuration_file ).to eq( configuration_file )
-      end
-      
-      it 'creates a new file if the passed one does not exist' do
-        #ConfigurationFile.load( 'some/file' )
-      end
-      
+
     end
     
     describe 'to_yaml' do

@@ -4,15 +4,25 @@ module ShipTrack
   
   describe Configuration do
     
-    it 'sets parameters in constructor' do
-      configuration = Configuration.new( { 'path' => 'some/path' } )
-      expect( configuration[ 'path' ] ).to eq 'some/path'
-    end
+    describe 'construction' do
+      
+      let( :configuration_file ) { double( 'configuration_file' ) }
+      
+      before( :each ) do
+        configuration_file.stub( :each ).and_yield( :name, 'value' )
+      end
     
-    it 'sets parameters through []' do
-      configuration = Configuration.new( {} )
-      configuration[ 'path' ] = 'another/path'
-      expect( configuration[ 'path' ] ).to eq 'another/path'
+      it 'sets parameters in constructor' do
+        configuration = Configuration.new( configuration_file )
+        expect( configuration[ :name ] ).to eq( 'value' )
+      end
+    
+      it 'sets parameters through []' do
+        configuration = Configuration.new( {} )
+        configuration[ :name ] = 'value'
+        expect( configuration[ :name ] ).to eq( 'value' )
+      end
+      
     end
     
   end

@@ -11,10 +11,11 @@ module ShipTrack
   $program = 'shiptrack'
   $resources_path = File.expand_path( File.dirname( __FILE__ ) + '/../res' )
   
-  configuration = Configuration.load( "#{ENV['HOME']}/.shiptrackrc" )
+  configuration_file = ConfigurationFile.load( "#{ENV['HOME']}/.shiptrackrc" )
+  configuration = Configuration.new( configuration_file )
   configuration[ :active_shipments_filename ] = 'active_shipments'
-  configuration[ :active_shipments_filepath ] = File.join( configuration[ 'path' ], configuration[ :active_shipments_filename ] )
-  configuration[ :archive_path ] = File.join( configuration[ 'path' ], 'archive' )
+  configuration[ :active_shipments_filepath ] = File.join( configuration[ :path ], configuration[ :active_shipments_filename ] )
+  configuration[ :archive_path ] = File.join( configuration[ :path ], 'archive' )
   configuration[ :active_archive_filepath ] = File.join( configuration[ :archive_path ], DateTime.now.strftime( 'archive_%Y-%m' ) )
 
   FileUtils.mkdir configuration[ 'path' ] unless File.directory?( configuration[ 'path' ] )

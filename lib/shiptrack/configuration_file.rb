@@ -23,7 +23,10 @@ module ShipTrack
     end
     
     def self.load( filename )
-      ConfigurationFile.new( YAML.load_file( filename ) )
+      return ConfigurationFile.new( YAML.load_file( filename ) ) if File.exists?( filename )
+      new_configuration_file = ConfigurationFile.new( defaults )
+      new_configuration_file.save( filename )
+      new_configuration_file
     end
     
     def save( filename )
@@ -36,6 +39,12 @@ module ShipTrack
       key_symbols_to_strings( @items ).to_yaml
     end
     
+    def self.defaults
+      {
+        :path => "#{ENV['HOME']}/.shiptrack"
+      }
+    end
+
     private
     
       def keys_strings_to_symbols( thing )
