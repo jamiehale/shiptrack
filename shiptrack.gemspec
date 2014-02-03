@@ -11,6 +11,6 @@ Gem::Specification.new do |s|
   s.files        = Dir["{lib}/**/*.rb", "bin/*", "res/**/*", "COPYING", "*.md"]
   s.require_path = 'lib'
   s.executables << 'shiptrack'
-  s.add_runtime_dependency 'launchy', '>= 2.4.2'
-  s.add_development_dependency 'rspec', '>= 2.14.1'
+  s.add_runtime_dependency 'launchy', '~> 2.4', '>= 2.4.2'
+  s.add_development_dependency 'rspec', '~> 2.14', '>= 2.14.1'
 end
