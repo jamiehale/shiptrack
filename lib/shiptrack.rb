@@ -15,6 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with ShipTrack. If not, see <http://www.gnu.org/licenses/>.
 
+require 'yaml'
+require 'fileutils'
+
 require 'shiptrack/command'
 require 'shiptrack/command_processor'
 require 'shiptrack/command_parameter'
