@@ -74,8 +74,12 @@ module ShipTrack
       end
       
       it 'loads the active shipment list' do
-        pending 'I misunderstood how should_receive messes with stub(:load)'
         ShipmentList.should_receive( :load ).with( 'some/path' )
+        command.run( params, configuration, {} )
+      end
+      
+      it 'loads the archive shipment list' do
+        ShipmentList.should_receive( :load ).with( 'active/archive/filepath' )
         command.run( params, configuration, {} )
       end
       
