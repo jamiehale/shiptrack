@@ -25,10 +25,10 @@ module ShipTrack
       super( 'list' )
       describe 'Lists shipments and states'
       handle_no_parameters
-      handle_option CommandOption.new( :ordered, :flag )
-      handle_option CommandOption.new( :paid, :flag )
-      handle_option CommandOption.new( :shipped, :flag )
-      handle_option CommandOption.new( :received, :flag )
+      handle_option CommandOption.new( :ordered, :flag, 'List shipments with ORDERED state' )
+      handle_option CommandOption.new( :paid, :flag, 'List shipments with PAID state' )
+      handle_option CommandOption.new( :shipped, :flag, 'List shipments with SHIPPED state' )
+      handle_option CommandOption.new( :received, :flag, 'List shipments with RECEIVED state' )
       @dumper = dumper
     end
 

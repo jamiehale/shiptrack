@@ -83,7 +83,7 @@ module ShipTrack
       return if @options.empty?
       puts "Options:"
       @options.each do |name,option|
-        puts "%20s    %s" % [ option_details( option ), option.description ]
+        puts "%35s    %s" % [ option_details( option ), option.description ]
       end
     end
     

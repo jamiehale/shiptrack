@@ -23,7 +23,7 @@ module ShipTrack
       super( 'paid' )
       describe 'Mark an ORDERED shipment as paid'
       handle_parameters [ CommandParameter.new( :index, :int ) ]
-      handle_option CommandOption.new( :date, :string )
+      handle_option CommandOption.new( :date, :string, 'Specify the date on which the payment was made' )
     end
 
     def run( params, configuration, options )

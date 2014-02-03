@@ -42,7 +42,7 @@ module ShipTrack
       end
     
       it 'handles a date option' do
-        expect( command.options ).to include CommandOption.new( :date, :string )
+        expect( command.options ).to include CommandOption.new( :date, :string, 'Specify the date on which the payment was made' )
       end
       
       it 'only handles 1 option' do

@@ -47,19 +47,19 @@ module ShipTrack
       end
     
       it 'handles a ordered option' do
-        expect( command.options ).to include CommandOption.new( :ordered, :flag )
+        expect( command.options ).to include CommandOption.new( :ordered, :flag, 'List shipments with ORDERED state' )
       end
       
       it 'handles a paid option' do
-        expect( command.options ).to include CommandOption.new( :paid, :flag )
+        expect( command.options ).to include CommandOption.new( :paid, :flag, 'List shipments with PAID state' )
       end
       
       it 'handles a shipped option' do
-        expect( command.options ).to include CommandOption.new( :shipped, :flag )
+        expect( command.options ).to include CommandOption.new( :shipped, :flag, 'List shipments with SHIPPED state' )
       end
       
       it 'handles a received option' do
-        expect( command.options ).to include CommandOption.new( :received, :flag )
+        expect( command.options ).to include CommandOption.new( :received, :flag, 'List shipments with RECEIVED state' )
       end
       
       it 'only handles 4 options' do

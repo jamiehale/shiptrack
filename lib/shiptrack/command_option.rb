@@ -19,16 +19,18 @@ module ShipTrack
   
   class CommandOption
     
-    attr_reader :name, :type
+    attr_reader :name, :type, :description
     
-    def initialize( name, type )
+    def initialize( name, type, description = '' )
       @name = name
       @type = type
+      @description = description
     end
     
     def ==( other )
       return false unless other.name == @name
       return false unless other.type == @type
+      return false unless other.description == @description
       true
     end
     

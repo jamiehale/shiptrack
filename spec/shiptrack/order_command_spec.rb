@@ -42,11 +42,11 @@ module ShipTrack
       end
 
       it 'handles a vendor option' do
-        expect( command.options ).to include CommandOption.new( :vendor, :string )
+        expect( command.options ).to include CommandOption.new( :vendor, :string, 'Specify a vendor for the shipment' )
       end
       
       it 'handles a date option' do
-        expect( command.options ).to include CommandOption.new( :date, :string )
+        expect( command.options ).to include CommandOption.new( :date, :string, 'Specify the date on which the shipment was ordered' )
       end
       
       it 'only handles 2 option' do

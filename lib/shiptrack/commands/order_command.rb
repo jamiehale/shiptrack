@@ -23,8 +23,8 @@ module ShipTrack
       super( 'order' )
       describe 'Record an order'
       handle_parameters [ CommandParameter.new( :name, :string ) ]
-      handle_option CommandOption.new( :vendor, :string )
-      handle_option CommandOption.new( :date, :string )
+      handle_option CommandOption.new( :vendor, :string, 'Specify a vendor for the shipment' )
+      handle_option CommandOption.new( :date, :string, 'Specify the date on which the shipment was ordered' )
     end
 
     def run( params, configuration, options )

@@ -42,15 +42,15 @@ module ShipTrack
       end
     
       it 'handles a date option' do
-        expect( command.options ).to include CommandOption.new( :date, :string )
+        expect( command.options ).to include CommandOption.new( :date, :string, 'Specify the date on which the shipment was shipped' )
       end
       
       it 'handles a method option' do
-        expect( command.options ).to include CommandOption.new( :method, :string )
+        expect( command.options ).to include CommandOption.new( :method, :string, 'Specify the method used to ship' )
       end
       
       it 'handles a tracking_number option' do
-        expect( command.options ).to include CommandOption.new( :tracking_number, :string )
+        expect( command.options ).to include CommandOption.new( :tracking_number, :string, 'Specify the shipping tracking number' )
       end
       
       it 'only handles 3 options' do

@@ -23,7 +23,7 @@ module ShipTrack
     
     describe 'constructor' do
       
-      let( :option ) { CommandOption.new( :date, :string ) }
+      let( :option ) { CommandOption.new( :date, :string, 'description' ) }
       
       it 'has a name' do
         expect( option.name ).to eq :date
@@ -33,12 +33,16 @@ module ShipTrack
         expect( option.type ).to eq :string
       end
       
+      it 'has a description' do
+        expect( option.description ).to eq 'description'
+      end
+      
     end
     
     describe '==' do
       
       it 'handles equality' do
-        expect( CommandOption.new( :date, :string ) ).to eq CommandOption.new( :date, :string )
+        expect( CommandOption.new( :date, :string, 'description' ) ).to eq CommandOption.new( :date, :string, 'description' )
       end
       
     end

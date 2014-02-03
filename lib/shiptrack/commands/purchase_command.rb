@@ -23,8 +23,8 @@ module ShipTrack
       super( 'purchase' )
       describe 'Record a purchase for tracking'
       handle_parameters [ CommandParameter.new( :name, :string ) ]
-      handle_option CommandOption.new( :vendor, :string )
-      handle_option CommandOption.new( :date, :string )
+      handle_option CommandOption.new( :vendor, :string, 'Specify a vendor for the shipment' )
+      handle_option CommandOption.new( :date, :string, 'Specify the date on which the shipment was purchased' )
     end
     
     def run( params, configuration, options )

@@ -42,51 +42,47 @@ module ShipTrack
       end
     
       it 'handles a name option' do
-        expect( command.options ).to include CommandOption.new( :name, :string )
-      end
-      
-      it 'handles a name option' do
-        expect( command.options ).to include CommandOption.new( :name, :string )
+        expect( command.options ).to include CommandOption.new( :name, :string, 'Specify the name of the shipment' )
       end
       
       it 'handles a vendor option' do
-        expect( command.options ).to include CommandOption.new( :vendor, :string )
+        expect( command.options ).to include CommandOption.new( :vendor, :string, 'Specify the vendor' )
       end
       
       it 'handles a order_date option' do
-        expect( command.options ).to include CommandOption.new( :order_date, :string )
+        expect( command.options ).to include CommandOption.new( :order_date, :string, 'Specify the date on which the shipment was ordered' )
       end
       
       it 'handles a payment_date option' do
-        expect( command.options ).to include CommandOption.new( :payment_date, :string )
+        expect( command.options ).to include CommandOption.new( :payment_date, :string, 'Specify the date on which payment was made' )
       end
       
       it 'handles a ship_date option' do
-        expect( command.options ).to include CommandOption.new( :ship_date, :string )
+        expect( command.options ).to include CommandOption.new( :ship_date, :string, 'Specify the date on which the shipment was shipped' )
       end
       
       it 'handles a ship_method option' do
-        expect( command.options ).to include CommandOption.new( :ship_method, :string )
+        expect( command.options ).to include CommandOption.new( :ship_method, :string, 'Specify the shipping method' )
       end
       
       it 'handles a tracking_number option' do
-        expect( command.options ).to include CommandOption.new( :tracking_number, :string )
+        expect( command.options ).to include CommandOption.new( :tracking_number, :string, 'Specify the tracking number' )
       end
       
       it 'handles a receipt_date option' do
-        expect( command.options ).to include CommandOption.new( :receipt_date, :string )
+        expect( command.options ).to include CommandOption.new( :receipt_date, :string, 'Specify the date on which the shipment was received' )
       end
       
       it 'handles a clear_receipt option' do
-        expect( command.options ).to include CommandOption.new( :clear_receipt, :flag )
+        expect( command.options ).to include CommandOption.new( :clear_receipt, :flag, 'Clear the receipt date' )
       end
       
       it 'handles a clear_shipping option' do
-        expect( command.options ).to include CommandOption.new( :clear_shipping, :flag )
+        expect( command.options ).to include CommandOption.new( :clear_shipping, :flag, 'Clear shipping details' )
       end
       
       it 'handles a clear_payment option' do
-        expect( command.options ).to include CommandOption.new( :clear_payment, :flag )
+        expect( command.options ).to include CommandOption.new( :clear_payment, :flag, 'Clear payment date' )
       end
       
       it 'only handles 11 options' do

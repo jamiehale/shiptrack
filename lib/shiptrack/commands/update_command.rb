@@ -23,17 +23,17 @@ module ShipTrack
       super( 'update' )
       describe 'Updates attributes of a shipment'
       handle_parameters [ CommandParameter.new( :index, :int ) ]
-      handle_option CommandOption.new( :name, :string )
-      handle_option CommandOption.new( :vendor, :string )
-      handle_option CommandOption.new( :order_date, :string )
-      handle_option CommandOption.new( :payment_date, :string )
-      handle_option CommandOption.new( :ship_date, :string )
-      handle_option CommandOption.new( :ship_method, :string )
-      handle_option CommandOption.new( :tracking_number, :string )
-      handle_option CommandOption.new( :receipt_date, :string )
-      handle_option CommandOption.new( :clear_receipt, :flag )
-      handle_option CommandOption.new( :clear_shipping, :flag )
-      handle_option CommandOption.new( :clear_payment, :flag )
+      handle_option CommandOption.new( :name, :string, 'Specify the name of the shipment' )
+      handle_option CommandOption.new( :vendor, :string, 'Specify the vendor' )
+      handle_option CommandOption.new( :order_date, :string, 'Specify the date on which the shipment was ordered' )
+      handle_option CommandOption.new( :payment_date, :string, 'Specify the date on which payment was made' )
+      handle_option CommandOption.new( :ship_date, :string, 'Specify the date on which the shipment was shipped' )
+      handle_option CommandOption.new( :ship_method, :string, 'Specify the shipping method' )
+      handle_option CommandOption.new( :tracking_number, :string, 'Specify the tracking number' )
+      handle_option CommandOption.new( :receipt_date, :string, 'Specify the date on which the shipment was received' )
+      handle_option CommandOption.new( :clear_receipt, :flag, 'Clear the receipt date' )
+      handle_option CommandOption.new( :clear_shipping, :flag, 'Clear shipping details' )
+      handle_option CommandOption.new( :clear_payment, :flag, 'Clear payment date' )
     end
     
     def run( params, configuration, options )

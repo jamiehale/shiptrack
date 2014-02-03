@@ -23,7 +23,7 @@ module ShipTrack
       super( 'receive' )
       describe 'Mark a shipment as RECEIVED'
       handle_parameters [ CommandParameter.new( :index, :int ) ]
-      handle_option CommandOption.new( :date, :string )
+      handle_option CommandOption.new( :date, :string, 'Specify the date on which the shipment was received' )
     end
     
     def run( params, configuration, options )

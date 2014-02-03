@@ -23,9 +23,9 @@ module ShipTrack
       super( 'ship' )
       describe 'Mark a shipment as SHIPPED'
       handle_parameters [ CommandParameter.new( :index, :int ) ]
-      handle_option CommandOption.new( :date, :string )
-      handle_option CommandOption.new( :method, :string )
-      handle_option CommandOption.new( :tracking_number, :string )
+      handle_option CommandOption.new( :date, :string, 'Specify the date on which the shipment was shipped' )
+      handle_option CommandOption.new( :method, :string, 'Specify the method used to ship' )
+      handle_option CommandOption.new( :tracking_number, :string, 'Specify the shipping tracking number' )
     end
     
     def run( params, configuration, options )
