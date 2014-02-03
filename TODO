@@ -1,7 +1,6 @@
 * Tidy!!
 * Make shiptrack list prettier
 * version the file format?
-** dynamically rename options with underscores to dashes
 * command to cancel an order
 * archive command to archive canceled orders
 * --canceled to list command

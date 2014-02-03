@@ -47,6 +47,24 @@ module ShipTrack
       
     end
     
+    describe 'name' do
+      
+      let( :option ) { CommandOption.new( :tracking_number, :string ) }
+      
+      it 'replaces underscores with dashes' do
+        expect( option.name_as_option_string ).to eq( 'tracking-number' )
+      end
+      
+    end
+    
+    describe 'string to symbol' do
+      
+      it 'converts an option name string to a symbol' do
+        expect( CommandOption.name_string_to_symbol( 'tracking-number' ) ).to eq :tracking_number
+      end
+      
+    end
+    
   end
   
 end

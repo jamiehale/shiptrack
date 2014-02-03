@@ -27,11 +27,19 @@ module ShipTrack
       @description = description
     end
     
+    def name_as_option_string
+      @name.to_s.sub( '_', '-' )
+    end
+    
     def ==( other )
       return false unless other.name == @name
       return false unless other.type == @type
       return false unless other.description == @description
       true
+    end
+    
+    def self.name_string_to_symbol( s )
+      s.sub( '-', '_' ).to_sym
     end
     
   end

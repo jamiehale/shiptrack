@@ -46,7 +46,7 @@ module ShipTrack
     end
     
     def handle_option( option )
-      @options[ option.name ] = option
+      @options[ option.name_as_option_string ] = option
     end
     
     def inject_command( name, configuration, args = [] )
@@ -89,9 +89,9 @@ module ShipTrack
     
     def option_details( option )
       if option.type == :string
-        "--#{option.name} <#{option.name}>"
+        "--#{option.name_as_option_string} <#{option.name_as_option_string}>"
       else
-        "--#{option.name}"
+        "--#{option.name_as_option_string}"
       end
     end
     
@@ -101,17 +101,17 @@ module ShipTrack
       i = 0
       while ( i < args.size ) do
         if @options.keys.map{|o| "--#{o}"}.include? args[ i ]
-          option_name = ( ( args[ i ] )[ 2..-1 ] ).to_sym
+          option_name = ( args[ i ] )[ 2..-1 ]
           option = @options[ option_name ]
           if option.type == :string
             if ( i + 1 ) < args.size
-              options[ option_name ] = args[ i + 1 ]
+              options[ CommandOption.name_string_to_symbol( option_name ) ] = args[ i + 1 ]
               i += 1
             else
               usage
             end
-          elsif details[ :type ] == :flag
-            options[ option_name ] = true
+          elsif option.type == :flag
+            options[ CommandOption.name_string_to_symbol( option_name ) ] = true
           else
             raise "Invalid option type #{option.type}"
           end
