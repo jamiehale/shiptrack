@@ -109,6 +109,16 @@ module ShipTrack
       
     end
     
+    describe '#get_by_index' do
+      
+      let( :shipment_list ) { ShipmentList.new( [ build( :shipment ) ] ) }
+      
+      it 'fails with an invalid index' do
+        expect { shipment_list.get_by_index( 4 ) }.to raise_error 'Invalid index'
+      end
+      
+    end
+    
     describe '.load' do
     
       let( :shipment ) { Shipment.new( { :name => 'Something', :vendor => 'Somebody', :order_date => '2014-01-01' } ) }

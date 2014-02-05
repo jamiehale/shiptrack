@@ -52,6 +52,7 @@ module ShipTrack
     end
     
     def get_by_index( index )
+      raise 'Invalid index' if index >= @shipments.length
       @shipments[ index ]
     end
     
