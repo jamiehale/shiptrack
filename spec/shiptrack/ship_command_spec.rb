@@ -21,10 +21,10 @@ module ShipTrack
   
   describe ShipCommand do
     
+    let( :command ) { ShipCommand.new }
+
     describe '.initialize' do
       
-      let( :command ) { ShipCommand.new }
-    
       it 'has a name' do
         expect( command.name ).to eq 'ship'
       end
@@ -61,7 +61,6 @@ module ShipTrack
     
     describe '#run' do
       
-      let( :command ) { ShipCommand.new }
       let( :params ) { { :index => 1 } }
       let( :configuration ) { { :active_shipments_filepath => 'some/path' } }
       let( :shipment_list ) { double( 'shipment_list' ) }
@@ -108,6 +107,43 @@ module ShipTrack
         shipment.stub( :tracking_number= )
         shipment.should_receive( :tracking_number= ).with( '12345' )
         command.run( params, configuration, { :tracking_number => '12345' } )
+      end
+      
+    end
+    
+    describe '#run on shipment with invalid state' do
+
+      let( :params ) { { :index => 1 } }
+      let( :configuration ) { { :active_shipments_filepath => 'some/path' } }
+      let( :shipment_list ) { double( 'shipment list' ) }
+      
+      before( :each ) do
+        ShipmentList.stub( :load ).and_return( shipment_list )
+        shipment_list.stub( :save )
+      end
+
+      describe 'shipped' do
+        
+        before( :each ) do
+          shipment_list.stub( :get_by_index ).and_return( build( :shipped_shipment ) )
+        end
+        
+        it 'fails if the shipment has already shipped' do
+          expect { command.run( params, configuration, {} ) }.to raise_error 'Shipment already shipped'
+        end
+        
+      end
+      
+      describe 'received' do
+        
+        before( :each ) do
+          shipment_list.stub( :get_by_index ).and_return( build( :received_shipment ) )
+        end
+        
+        it 'fails if the shipment has already been received' do
+          expect { command.run( params, configuration, {} ) }.to raise_error 'Shipment already received'
+        end
+        
       end
       
     end

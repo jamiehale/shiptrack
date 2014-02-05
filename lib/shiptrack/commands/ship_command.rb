@@ -31,6 +31,7 @@ module ShipTrack
     def run( params, configuration, options )
       shipment_list = ShipmentList.load( configuration[ :active_shipments_filepath ] )
       shipment = shipment_list.get_by_index( params[ :index ] - 1 )
+      validate_state( shipment )
       shipment.ship_date = ship_date( options )
       shipment.ship_method = options[ :method ] unless options[ :method ].nil?
       shipment.tracking_number = options[ :tracking_number ] unless options[ :tracking_number ].nil?
@@ -38,6 +39,11 @@ module ShipTrack
     end
     
     private
+    
+      def validate_state( shipment )
+        raise 'Shipment already shipped' if shipment.state == 'SHIPPED'
+        raise 'Shipment already received' if shipment.state == 'RECEIVED'
+      end
     
       def ship_date( options )
         return options[ :date ] unless options[ :date ].nil?

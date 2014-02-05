@@ -29,12 +29,17 @@ module ShipTrack
     def run( params, configuration, options )
       shipment_list = ShipmentList.load( configuration[ :active_shipments_filepath ] )
       shipment = shipment_list.get_by_index( params[ :index ] - 1 )
+      validate_state( shipment )
       shipment.receipt_date = receipt_date( options )
       shipment_list.save( configuration[ :active_shipments_filepath ] )
     end
 
     private
     
+      def validate_state( shipment )
+        raise 'Shipment already received' if shipment.state == 'RECEIVED'
+      end
+  
       def receipt_date( options )
         return options[ :date ] unless options[ :date ].nil?
         DateTime.now.strftime( '%Y-%m-%d' )
