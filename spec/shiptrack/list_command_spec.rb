@@ -73,13 +73,12 @@ module ShipTrack
       let( :params ) { {} }
       let( :configuration ) { { :active_shipments_filepath => 'some/path' } }
       let( :shipment_list ) { double( 'shipment_list' ) }
-      let( :shipment ) { double( 'shipment' ) }
+      let( :first_shipment ) { build( :shipment ) }
+      let( :second_shipment ) { build( :paid_shipment ) }
       
       before( :each ) do
         ShipmentList.stub( :load ).and_return( shipment_list )
-        shipment_list.stub( :each ).and_yield( 0, shipment )
-        shipment.stub( :name )
-        shipment.stub( :state )
+        shipment_list.stub( :each ).and_yield( 0, first_shipment ).and_yield( 1, second_shipment )
       end
       
       it 'loads the active shipment list' do
@@ -87,8 +86,13 @@ module ShipTrack
         command.run( params, configuration, {} )
       end
       
-      it 'dumps the shipment' do
-        dumper.should_receive( :dump_list_line ).with( 1, shipment )
+      it 'dumps the first shipment' do
+        dumper.should_receive( :dump_list_line ).with( 1, first_shipment )
+        command.run( params, configuration, {} )
+      end
+      
+      it 'dumps the second shipment' do
+        dumper.should_receive( :dump_list_line ).with( 2, second_shipment )
         command.run( params, configuration, {} )
       end
       

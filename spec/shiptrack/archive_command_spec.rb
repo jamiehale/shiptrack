@@ -57,8 +57,8 @@ module ShipTrack
         :active_archive_filepath => 'active/archive/filepath' } }
       let( :shipment_list ) { double( 'shipment_list' ) }
       let( :archive_list ) { double( 'archive_list' ) }
-      let( :shipped_shipment ) { double( 'shipped_shipment' ) }
-      let( :received_shipment ) { double( 'received_shipment' ) }
+      let( :shipped_shipment ) { build( :shipped_shipment ) }
+      let( :received_shipment ) { build( :received_shipment ) }
       
       before( :each ) do
         ShipmentList.stub( :load ).and_return( shipment_list, archive_list )
@@ -67,8 +67,6 @@ module ShipTrack
         shipment_list.stub( :save )
         archive_list.stub( :add )
         archive_list.stub( :save )
-        shipped_shipment.stub( :state ).and_return( 'SHIPPED' )
-        received_shipment.stub( :state ).and_return( 'RECEIVED' )
         File.stub( :directory? ).and_return( true )
         File.stub( :exists? ).and_return( true )
       end

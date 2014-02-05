@@ -59,6 +59,7 @@ module ShipTrack
       
       let( :command ) { OrderCommand.new }
       let( :params ) { { :name => 'Something' } }
+      let( :options ) { { :vendor => 'Somebody' } }
       let( :configuration ) { { :active_shipments_filepath => 'some/path' } }
       let( :shipment_list ) { double( 'shipment_list' ) }
       let( :shipment ) { double( 'shipment' ) }
@@ -84,6 +85,11 @@ module ShipTrack
       it 'sets the order date from an option' do
         shipment.should_receive( :order_date= ).with( '2000-01-01' )
         command.run( params, configuration, { :date => '2000-01-01' } )
+      end
+      
+      it 'sets the vendor from an option' do
+        shipment.should_receive( :vendor= ).with( 'Somebody' )
+        command.run( params, configuration, { :vendor => 'Somebody' } )
       end
       
       it 'loads the active shipment list' do

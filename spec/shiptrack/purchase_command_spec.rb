@@ -86,6 +86,11 @@ module ShipTrack
         command.run( params, configuration, { :date => '2000-01-01' } )
       end
       
+      it 'sets the vendor from an option' do
+        shipment.should_receive( :vendor= ).with( 'Somebody' )
+        command.run( params, configuration, { :vendor => 'Somebody' } )
+      end
+      
       it 'loads the active shipment list' do
         ShipmentList.should_receive( :load ).with( 'some/path' )
         command.run( params, configuration, {} )

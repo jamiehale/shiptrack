@@ -13,4 +13,5 @@ Gem::Specification.new do |s|
   s.executables << 'shiptrack'
   s.add_runtime_dependency 'launchy', '~> 2.4', '>= 2.4.2'
   s.add_development_dependency 'rspec', '~> 2.14', '>= 2.14.1'
+  s.add_development_dependency 'factory_girl', '~> 4.3', '>= 4.3.0'
 end

@@ -65,13 +65,12 @@ module ShipTrack
       let( :params ) { { :index => 1 } }
       let( :configuration ) { { :active_shipments_filepath => 'some/path' } }
       let( :shipment_list ) { double( 'shipment_list' ) }
-      let( :shipment ) { double( 'shipment' ) }
+      let( :shipment ) { build( :paid_shipment ) }
       
       before( :each ) do
         ShipmentList.stub( :load ).and_return( shipment_list )
         shipment_list.stub( :get_by_index ).and_return( shipment )
         shipment_list.stub( :save )
-        shipment.stub( :ship_date= )
       end
       
       it 'loads the active shipment list' do

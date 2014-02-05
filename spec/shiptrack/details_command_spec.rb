@@ -57,21 +57,11 @@ module ShipTrack
       let( :params ) { { :index => 1 } }
       let( :configuration ) { { :active_shipments_filepath => 'some/path' } }
       let( :shipment_list ) { double( 'shipment_list' ) }
-      let( :shipment ) { double( 'shipment' ) }
+      let( :shipment ) { build( :shipped_shipment ) }
       
       before( :each ) do
         ShipmentList.stub( :load ).and_return( shipment_list )
         shipment_list.stub( :get_by_index ).and_return( shipment )
-        shipment.stub( :name ).and_return( 'Something' )
-        shipment.stub( :state ).and_return( 'SHIPPED' )
-        shipment.stub( :vendor ).and_return( 'Somebody' )
-        shipment.stub( :order_date ).and_return( '2014-01-01' )
-        shipment.stub( :payment_date ).and_return( '2014-01-02' )
-        shipment.stub( :ship_date ).and_return( '2014-01-03' )
-        shipment.stub( :ship_method ).and_return( 'UPS' )
-        shipment.stub( :tracking_number ).and_return( '12345' )
-        shipment.stub( :receipt_date ).and_return( nil )
-        $stdout.stub( :puts )
       end
       
       it 'loads the active shipment list' do

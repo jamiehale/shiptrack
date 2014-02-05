@@ -55,13 +55,11 @@ module ShipTrack
         :active_shipments_filepath => 'some/path',
         :tracking_urls => { :UPS => 'some/url?!!!' } } }
       let( :shipment_list ) { double( 'shipment_list' ) }
-      let( :shipment ) { double( 'shipment' ) }
+      let( :shipment ) { build( :shipped_shipment ) }
       
       before( :each ) do
         ShipmentList.stub( :load ).and_return( shipment_list )
         shipment_list.stub( :get_by_index ).and_return( shipment )
-        shipment.stub( :ship_method ).and_return( 'UPS' )
-        shipment.stub( :tracking_number ).and_return( '12345' )
         Launchy.stub( :open )
       end
       
