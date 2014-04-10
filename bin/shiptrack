@@ -59,7 +59,7 @@ module ShipTrack
     else
       command_processor.run( ARGV[ 0 ], configuration, ARGV[ 1..-1 ] )
     end
-  rescue RuntimeError => e
+  rescue Error => e
     abort "ERROR: #{e.message}"
   end
 

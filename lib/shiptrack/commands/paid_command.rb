@@ -37,9 +37,9 @@ module ShipTrack
     private
     
       def validate_state( shipment )
-        raise 'Payment already recorded' if shipment.state == 'PAID'
-        raise 'Shipment already shipped' if shipment.state == 'SHIPPED'
-        raise 'Shipment already received' if shipment.state == 'RECEIVED'
+        raise ShipmentStateError, 'Payment already recorded' if shipment.state == 'PAID'
+        raise ShipmentStateError, 'Shipment already shipped' if shipment.state == 'SHIPPED'
+        raise ShipmentStateError, 'Shipment already received' if shipment.state == 'RECEIVED'
       end
       
       def payment_date( options )

@@ -27,6 +27,7 @@ require 'shiptrack/configuration_file'
 require 'shiptrack/shipment'
 require 'shiptrack/shipment_list'
 require 'shiptrack/shipment_dumper'
+require 'shiptrack/shiptrack_exceptions'
 
 require 'shiptrack/commands/help_command'
 require 'shiptrack/commands/version_command'

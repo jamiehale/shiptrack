@@ -31,7 +31,7 @@ module ShipTrack
     end
     
     def run( name, configuration, args = [] )
-      raise 'No such command' unless @commands.has_key?( name )
+      raise CommandError, 'No such command' unless @commands.has_key?( name )
       new_args, options = @commands[ name ].parse_options( args )
       @commands[ name ].run( new_args, configuration, options )
     end
