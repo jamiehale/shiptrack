@@ -45,7 +45,7 @@ module ShipTrack
     end
     
     def dump_list_line( index, shipment )
-      @stream.puts "#{index}: #{shipment.name} (from #{shipment.vendor}) [#{shipment.state}]"
+      @stream.puts "#{index}: #{shipment.name} #{from_details(shipment)}[#{shipment.state}]"
     end
     
     private
@@ -56,6 +56,10 @@ module ShipTrack
       
       def space
         @stream.puts ''
+      end
+      
+      def from_details( shipment )
+        shipment.vendor.nil? ? '' : "(from #{shipment.vendor}) "
       end
       
   end
