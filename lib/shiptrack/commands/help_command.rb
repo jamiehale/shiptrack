@@ -21,7 +21,7 @@ module ShipTrack
     
     def initialize
       super( 'help' )
-      describe 'Shows information about sdoc commands'
+      describe 'Shows information about shiptrack commands'
       handle_parameters [ CommandParameter.new( :command, :string ) ]
     end
     
