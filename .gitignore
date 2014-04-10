@@ -1,3 +1,4 @@
 *.gem
-scripts
+scripts/shiptrackrc_production
+scripts/shiptrackrc_development
 
