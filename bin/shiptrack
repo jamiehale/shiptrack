@@ -21,7 +21,7 @@ require 'shiptrack'
 
 module ShipTrack
   
-  $VERSION = '0.0.4'
+  $VERSION = '0.0.5'
   
   $program = 'shiptrack'
   $resources_path = File.expand_path( File.dirname( __FILE__ ) + '/../res' )
