@@ -6,3 +6,5 @@
 * push loading of shipment list down into command? or module?
 * track history on each shipment
 * alias commands?
+* use optparse package
+* use fakefs for cucumber?
