@@ -17,7 +17,7 @@
 
 Gem::Specification.new do |s|
   s.name        = 'shiptrack'
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.date        = '2014-04-09'
   s.license     = 'GPLv3'
   s.summary     = "Sancorp Shipment Tracking"
